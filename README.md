@@ -2,33 +2,13 @@
 
 迷你抖音，实现基本滑动刷新浏览，点开放大播放暂停，权限申请，视频拍摄、录制、预览、上传
 
-### 
-主页面添加了2个可用的btn
-##
-@Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.page_message:
-                startActivity(new Intent(this, MessageActivity.class));
-                break;
-            case R.id.btn_add:
-                if (ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                        || ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                        ||ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            REQUEST_VIDEO_CAPTURE);
-                }else{
-                    startActivity(new Intent(this,Solution2C2Activity.class));
-                }
-        }
-    }
+初次结识Android，做的很丑，以后不断学习会对该雏形进行改善、优化
 
+## 
+主页面添加了2个可用的btn:拍摄选择上传、消息（本地data）
 
+####
+1 bug：select image之后toast提示无法播放本视频错误
 ### 
 界面：
 ### 
