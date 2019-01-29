@@ -4,6 +4,7 @@
 
 ### 
 主页面添加了2个可用的btn
+##
 @Override
     public void onClick(View v) {
         switch (v.getId()) {
