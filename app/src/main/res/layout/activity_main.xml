@@ -116,8 +116,9 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:background="@drawable/plus"
-            android:onClick="Solution2C2"
+
             />
+//android:onClick="Solution2C2"
 
         <Button
             android:id="@+id/page_message"

@@ -61,19 +61,9 @@ private  void doit(){
     videoView = findViewById(R.id.img);
     ok.setOnClickListener(new View.OnClickListener(){
         @Override public void onClick(View v) {
-            if (ContextCompat.checkSelfPermission(Solution2C2Activity.this,
-                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(Solution2C2Activity.this,
-                    Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                    ||ContextCompat.checkSelfPermission(Solution2C2Activity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(Solution2C2Activity.this,
-                        new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        REQUEST_VIDEO_CAPTURE);
-            } else {
+
                 takeVideo();
-            }
+
         }
     });
 }
@@ -85,16 +75,21 @@ private  void doit(){
 
     }
 
-  /*  @Override
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_VIDEO_CAPTURE: {
                 //todo 判断权限是否已经授予
 
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                for (int i = 0; i < permissions.length ; i++ ){
+                    Log.i("MainActivity","申请的权限为：" + permissions[i] +"，申请结果：" +
+                            grantResults[i]);
+                }
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                     takeVideo();
                     break;
                 }
@@ -102,11 +97,13 @@ private  void doit(){
 
             }
         }
-    }*/
+    }
     private void initBtns() {
         mBtn = findViewById(R.id.btn);
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
+
+
                 String s = mBtn.getText().toString();
                 if (getString(R.string.select_an_image).equals(s)) {
                     chooseImage();

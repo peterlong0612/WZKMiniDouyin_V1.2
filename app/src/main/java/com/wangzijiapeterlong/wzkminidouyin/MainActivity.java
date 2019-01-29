@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.video_list);
-        //findViewById(R.id.btn_add).setOnClickListener(this);
+        findViewById(R.id.btn_add).setOnClickListener(this);
         findViewById(R.id.page_message).setOnClickListener(this);
         //findViewById(R.id.)
 
@@ -116,10 +116,13 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
         });
     }
 
-    public void Solution2C2(View view) {
+    /*public void Solution2C2(View view) {
+
+
+
         startActivity(new Intent(this, Solution2C2Activity.class));
 
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -127,24 +130,20 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
             case R.id.page_message:
                 startActivity(new Intent(this, MessageActivity.class));
                 break;
-
-
             case R.id.btn_add:
-            {
                 if (ContextCompat.checkSelfPermission(MainActivity.this,
                         Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
                         || ContextCompat.checkSelfPermission(MainActivity.this,
                         Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
                         ||ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                        ) {
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(MainActivity.this,
                             new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA,
-                                    Manifest.permission.READ_EXTERNAL_STORAGE},
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},
                             REQUEST_VIDEO_CAPTURE);
+                }else{
+                    startActivity(new Intent(this,Solution2C2Activity.class));
                 }
-            }
-            break;
         }
     }
 
@@ -214,12 +213,16 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ListIte
                 //todo 判断权限是否已经授予
 
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                for (int i = 0; i < permissions.length ; i++ ){
+                    Log.i("MainActivity","申请的权限为：" + permissions[i] +"，申请结果：" +
+                            grantResults[i]);
+                }
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED
                         && grantResults[2] == PackageManager.PERMISSION_GRANTED
                         ) {
-                    takeVideo();
+                    startActivity(new Intent(this,Solution2C2Activity.class));
                     break;
                 }
 
